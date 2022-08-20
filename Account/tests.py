@@ -26,3 +26,4 @@
 #         self.assertEqual(author, 'testuser1')
 #         self.assertEqual(title, 'Blog title')
 #         self.assertEqual(body, 'Body content...')
+
