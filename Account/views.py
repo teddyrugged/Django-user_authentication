@@ -8,10 +8,6 @@ from rest_framework.response import Response
 
 
 
-# from rest_framework import views
-
-# from rest_framework.decorators import view
-# Create your views here.
 
 
 # class 
