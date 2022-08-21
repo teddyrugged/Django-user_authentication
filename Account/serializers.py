@@ -1,5 +1,21 @@
 from rest_framework import serializers
-from account.models import Account
+from .models import Profile
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    #: customizes the TokenObtainPairSerializer to return additional
+    #: info (first_name, last_name, id) of the user when logged in
+    def validate(self, attrs):
+        data = super(CustomTokenObtainPairSerializer, self).validate(attrs)
+        data.update({'user': {
+                            'first_name': self.user.first_name, 
+                            'last_name': self.user.last_name,
+                            'id': self.user.id,
+                        }
+                    })
+        return data
+
 
 class RegistrationSerializer(serializers.ModelSerializer):
     
@@ -7,10 +23,10 @@ class RegistrationSerializer(serializers.ModelSerializer):
     
     class Meta:
         
-        model = Account
+        model = Profile
         fields = ['first_name', 'last_name', 'email', 'password', 'confirm_password']
         extra_kwargs = {
-        'password':{write_only:True}
+        # 'password':{read_only:True}
         }
         
         def save(self):

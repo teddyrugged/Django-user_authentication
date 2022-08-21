@@ -42,14 +42,14 @@ class Profile(AbstractBaseUser):
     last_name = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     confirm_password = models.CharField(max_length=255)
-    is_staff = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
-    last_login = models.DateTimeField(auto_now=True) 
+    is_staff = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(verbose_name='date joined',auto_now_add=True)
+    last_login = models.DateTimeField(verbose_name='last login',auto_now_add=True)
     
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS =['first_name', 'last_name']
+    REQUIRED_FIELDS =[]
     
     objects = ProfileManager()
     
@@ -57,3 +57,8 @@ class Profile(AbstractBaseUser):
     def __str__(self):
         return self.last_name
     
+    def has_perm(self, perm, obj=None):
+        return self.is_admin
+
+    def has_module_perms(self, app_label):
+        return True
