@@ -4,8 +4,6 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    #: customizes the TokenObtainPairSerializer to return additional
-    #: info (first_name, last_name, id) of the user when logged in
     def validate(self, attrs):
         data = super(CustomTokenObtainPairSerializer, self).validate(attrs)
         data.update({'user': {
@@ -18,26 +16,25 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(required =True)
+    password = serializers.CharField(min_length=6, required=True,write_only=True)
     
-    confirm_password = serializers.CharField(style = {"input_type": "password"},write_only=True)
+    class Meta:  
     
-    class Meta:
-        
         model = Profile
-        fields = ['first_name', 'last_name', 'email', 'password', 'confirm_password']
+        fields = ['first_name', 'last_name', 'email', 'password']
         extra_kwargs = {
-        # 'password':{read_only:True}
+        'password':{"write_only":True},
         }
         
-        def save(self):
-            account = Account(
-                email=self.validate_email['email'],
-            )
-            password = self.validate_password['password']
-            confirm_password = self.validate_password['confirm_password']
-            
-            
-            if password != confirm_password:
-                raise serializers.ValidationError({'password': 'passwords do not match.'})
-            account.set_password(password)
-            account.save()
+    def create(self, validated_data):
+        password = self.validated_data.pop('password',None)
+        account = self.Meta.model(**validated_data)
+        print(password)
+        if password is None:
+            raise  serializers.ValidationError({'password': 'Enter password.'})
+        account.set_password(password)
+        print(account.password)
+        account.save()
+        return account
+    
