@@ -28,7 +28,8 @@ SECRET_KEY = config("SECRET_KEY", default=get_random_secret_key(), cast=str)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"] 
+# 'ethnos-project.herokuapp.com' '127.0.0.1'
 
 
 # Application definition
