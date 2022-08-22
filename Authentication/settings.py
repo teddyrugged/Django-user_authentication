@@ -29,6 +29,7 @@ SECRET_KEY = config("SECRET_KEY", default=get_random_secret_key(), cast=str)
 DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = ["*"] 
+
 # 'ethnos-project.herokuapp.com' '127.0.0.1'
 
 
