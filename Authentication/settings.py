@@ -13,7 +13,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_URL = '/static/'
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,8 +32,8 @@ SECRET_KEY = config("SECRET_KEY", default=get_random_secret_key(), cast=str)
 DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = ["*"] 
+
 # 'ethnos-project.herokuapp.com' '127.0.0.1'
-WHITENOISE_AUTOREFRESH = True
 
 
 # Application definition
@@ -144,10 +147,6 @@ USE_TZ = True
 
 
 
-#CORS_ALLOWED_ORIGINS = ["*"]
-#CORS_ORIGIN_WHITELIST = ["*"]
-
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
@@ -157,7 +156,8 @@ CORS_ALLOW_METHODS = ["*"]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
- CORS_ORIGIN_WHITELIST = ["http://localhost:8000", 
+
+CORS_ORIGIN_WHITELIST = ["http://localhost:8000", 
                           "http://127.0.0.1:8000"]
 
 
