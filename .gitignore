@@ -1,0 +1,10 @@
+
+
+.DS_Store
+.old
+env/
+venv/
+db.sqlite3
+data/
+.env
+env/
