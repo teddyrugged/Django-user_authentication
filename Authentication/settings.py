@@ -98,9 +98,9 @@ WSGI_APPLICATION = "Authentication.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": config("DB_NAME", 'ethnos_db'),
-        "USER": config("DB_USER", 'postgres'),
-        "PASSWORD": config("DB_PASSWORD", 'Holycraft@30'),
+        "NAME": config("DB_NAME", default='ethnos_db'),
+        "USER": config("DB_USER", default='postgres'),
+        "PASSWORD": config("DB_PASSWORD", default='Holycraft@30'),
         "HOST": config("DB_HOST", default='localhost'),
         "PORT": os.environ.get("PORT", default=5432),
     }
