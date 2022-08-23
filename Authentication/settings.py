@@ -30,7 +30,7 @@ SECRET_KEY = config("SECRET_KEY", default=get_random_secret_key(), cast=str)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://limitless-plateau-72386.herokuapp.com", "0.0.0.0"]
 
 # 'ethnos-project.herokuapp.com' '127.0.0.1'
 
@@ -98,11 +98,11 @@ WSGI_APPLICATION = "Authentication.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": config("DB_NAME", default='ethnos_db'),
-        "USER": config("DB_USER", default='postgres'),
-        "PASSWORD": config("DB_PASSWORD", default='Holycraft@30'),
-        "HOST": config("DB_HOST", default='localhost'),
-        "PORT": os.environ.get("PORT", default=5432),
+        "NAME": 'de44airidb5vqq',
+        "USER": 'kostwfwilnfroj',
+        "PASSWORD": 'cbaca4e3a0927f3ab5c97a4a4a553830505f4ab8b07995184ea8c510d2c3a65d',
+        "HOST": 'ec2-44-193-178-122.compute-1.amazonaws.com',
+        "PORT": 5432,
     }
 }
 
